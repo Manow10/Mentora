@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mentora - Tutor Booking App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <img src="mentora-logo.png" alt="Mentora Logo" class="logo">
+
+    <!-- Signup Section -->
+    <div id="signup">
+      <h2>Sign Up</h2>
+      <form id="signup-form">
+        <input type="text" id="signup-name" placeholder="Your Name" required>
+        <input type="email" id="signup-email" placeholder="Email" required>
+        <input type="password" id="signup-password" placeholder="Password" required>
+        <button type="submit">Sign Up</button>
+      </form>
+      <p>Already have an account? <a href="#" onclick="showLogin()">Log in</a></p>
+    </div>
+
+    <!-- Login Section -->
+    <div id="login" style="display:none;">
+      <h2>Log In</h2>
+      <form id="login-form">
+        <input type="email" id="login-email" placeholder="Email" required>
+        <input type="password" id="login-password" placeholder="Password" required>
+        <button type="submit">Log In</button>
+      </form>
+      <p>Don't have an account? <a href="#" onclick="showSignup()">Sign up</a></p>
+    </div>
+
+    <!-- Dashboard Section -->
+    <div id="dashboard" style="display:none;">
+      <h2>Welcome, <span id="student-name"></span>!</h2>
+
+      <form id="booking-form">
+        <label for="tutor-select">Choose Tutor:</label>
+        <select id="tutor-select">
+          <option value="Rakiya">Rakiya</option>
+          <option value="Abdirahman">Abdirahman</option>
+          <option value="Shukri">Shukri</option>
+        </select>
+
+        <label for="booking-date">Select Date:</label>
+        <input type="date" id="booking-date" required>
+
+        <label for="time-slot">Select Time:</label>
+        <input type="time" id="time-slot" required>
+
+        <button type="submit">Book Session</button>
+      </form>
+
+      <h3>Your Sessions:</h3>
+      <ul id="booked-sessions-list"></ul>
+
+      <button id="logout-btn" class="logout-btn">Logout</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

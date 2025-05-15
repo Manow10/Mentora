@@ -1,0 +1,88 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f7fc;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 450px;
+  margin: 30px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+h2, h3 {
+  text-align: center;
+  color: #3366cc;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+input, select, button {
+  padding: 10px;
+  font-size: 16px;
+}
+
+button {
+  background-color: #3366cc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #254ca3;
+}
+
+a {
+  color: #3366cc;
+  text-decoration: none;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 20px;
+  max-width: 150px;
+  height: auto;
+}
+
+#booked-sessions-list {
+  list-style: none;
+  padding: 0;
+}
+
+#booked-sessions-list li {
+  background-color: #eef3fd;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.cancel-btn, .edit-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 8px;
+  cursor: pointer;
+  float: right;
+  border-radius: 4px;
+}
+
+.edit-btn {
+  background-color: #f39c12;
+}
+
+.logout-btn {
+  background-color: #444;
+  margin-top: 20px;
+}
