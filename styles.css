@@ -1,88 +1,65 @@
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #f4f7fc;
-  margin: 0;
-  padding: 0;
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f5f5f5;
 }
 
-.container {
-  max-width: 450px;
-  margin: 30px auto;
-  padding: 20px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.1);
-}
-
-h2, h3 {
-  text-align: center;
-  color: #3366cc;
-}
-
-form {
+header {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-input, select, button {
-  padding: 10px;
-  font-size: 16px;
-}
-
-button {
-  background-color: #3366cc;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #3498db;
   color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #254ca3;
-}
-
-a {
-  color: #3366cc;
-  text-decoration: none;
+  padding: 10px 20px;
 }
 
 .logo {
-  display: block;
-  margin: 0 auto 20px;
-  max-width: 150px;
-  height: auto;
+  width: 50px;
+  height: 50px;
 }
 
-#booked-sessions-list {
+main {
+  margin-top: 20px;
+}
+
+input, select, button {
+  display: block;
+  margin: 10px 0;
+  padding: 8px;
+  width: 100%;
+  max-width: 300px;
+}
+
+ul {
   list-style: none;
   padding: 0;
 }
 
-#booked-sessions-list li {
-  background-color: #eef3fd;
-  margin-bottom: 10px;
+li {
+  background-color: white;
   padding: 10px;
-  border-radius: 8px;
-  position: relative;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
 }
 
-.cancel-btn, .edit-btn {
-  background-color: #e74c3c;
+button {
+  background-color: #3498db;
   color: white;
   border: none;
-  padding: 5px 10px;
-  margin-left: 8px;
   cursor: pointer;
-  float: right;
-  border-radius: 4px;
 }
 
-.edit-btn {
-  background-color: #f39c12;
+button:hover {
+  background-color: #2980b9;
 }
 
-.logout-btn {
-  background-color: #444;
-  margin-top: 20px;
+.modal {
+  display: none;
+  position: fixed;
+  background-color: white;
+  padding: 20px;
+  border: 2px solid #000;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

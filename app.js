@@ -1,148 +1,72 @@
-let currentUser = null;
-let bookedSessions = [];
+let bookings = [];
+let editingIndex = null;
 
-function signup(event) {
-  event.preventDefault();
+function bookSession() {
+  const name = document.getElementById("student-name").value;
+  const tutor = document.getElementById("tutor-name").value;
+  const date = document.getElementById("date").value;
+  const time = document.getElementById("time").value;
 
-  const name = document.getElementById("signup-name").value;
-  const email = document.getElementById("signup-email").value;
-  const password = document.getElementById("signup-password").value;
-
-  if (!name || !email || !password) {
-    alert("Please fill all fields.");
+  if (!name || !date || !time) {
+    alert("Please fill all fields");
     return;
   }
 
-  const user = { name, email, password };
-  localStorage.setItem("mentora_user", JSON.stringify(user));
-  alert("Signup successful! Please log in.");
-  document.getElementById("signup-form").reset();
-  showLogin();
+  bookings.push({ name, tutor, date, time });
+  updateBookings();
+  clearForm();
 }
 
-function login(event) {
-  event.preventDefault();
-
-  const email = document.getElementById("login-email").value;
-  const password = document.getElementById("login-password").value;
-  const savedUser = JSON.parse(localStorage.getItem("mentora_user"));
-
-  if (!savedUser || savedUser.email !== email || savedUser.password !== password) {
-    alert("Invalid login credentials.");
-    return;
-  }
-
-  currentUser = savedUser;
-  showDashboard(currentUser.name);
-}
-
-function showLogin() {
-  document.getElementById("signup").style.display = "none";
-  document.getElementById("login").style.display = "block";
-  document.getElementById("dashboard").style.display = "none";
-}
-
-function showSignup() {
-  document.getElementById("signup").style.display = "block";
-  document.getElementById("login").style.display = "none";
-  document.getElementById("dashboard").style.display = "none";
-}
-
-function showDashboard(name) {
-  document.getElementById("signup").style.display = "none";
-  document.getElementById("login").style.display = "none";
-  document.getElementById("dashboard").style.display = "block";
-  document.getElementById("student-name").textContent = name;
-}
-
-function handleBooking(event) {
-  event.preventDefault();
-
-  const tutor = document.getElementById("tutor-select").value;
-  const date = document.getElementById("booking-date").value;
-  const time = document.getElementById("time-slot").value;
-
-  if (!tutor || !date || !time) {
-    alert("Please fill all fields.");
-    return;
-  }
-
-  const session = {
-    tutor,
-    time: `${date} at ${time}`
-  };
-
-  bookedSessions.push(session);
-  saveSessions();
-  renderDashboard();
-  document.getElementById("booking-form").reset();
-}
-
-function renderDashboard() {
-  const list = document.getElementById("booked-sessions-list");
+function updateBookings() {
+  const list = document.getElementById("booking-list");
   list.innerHTML = "";
 
-  bookedSessions.forEach((session, index) => {
+  bookings.forEach((booking, index) => {
     const li = document.createElement("li");
-    li.textContent = `${session.tutor} - ${session.time}`;
-
-    const cancelBtn = document.createElement("button");
-    cancelBtn.textContent = "Cancel";
-    cancelBtn.className = "cancel-btn";
-    cancelBtn.onclick = () => {
-      bookedSessions.splice(index, 1);
-      saveSessions();
-      renderDashboard();
-    };
-
-    const editBtn = document.createElement("button");
-    editBtn.textContent = "Edit";
-    editBtn.className = "edit-btn";
-    editBtn.onclick = () => {
-      const newDate = prompt("Enter new date (YYYY-MM-DD):", session.time.split(" ")[0]);
-      const newTime = prompt("Enter new time (e.g., 3:00 PM):", session.time.split("at ")[1]);
-
-      if (newDate && newTime) {
-        session.time = `${newDate} at ${newTime}`;
-        saveSessions();
-        renderDashboard();
-      }
-    };
-
-    li.appendChild(editBtn);
-    li.appendChild(cancelBtn);
+    li.innerHTML = `
+      <strong>${booking.name}</strong> booked <em>${booking.tutor}</em> on ${booking.date} at ${booking.time}
+      <br>
+      <button onclick="editBooking(${index})">Edit</button>
+      <button onclick="deleteBooking(${index})">Delete</button>
+    `;
     list.appendChild(li);
   });
 }
 
-function saveSessions() {
-  localStorage.setItem("mentora_sessions", JSON.stringify(bookedSessions));
+function clearForm() {
+  document.getElementById("student-name").value = "";
+  document.getElementById("tutor-name").selectedIndex = 0;
+  document.getElementById("date").value = "";
+  document.getElementById("time").value = "";
 }
 
-function loadSessions() {
-  const data = localStorage.getItem("mentora_sessions");
-  if (data) {
-    bookedSessions = JSON.parse(data);
+function editBooking(index) {
+  editingIndex = index;
+  document.getElementById("edit-date").value = bookings[index].date;
+  document.getElementById("edit-time").value = bookings[index].time;
+  document.getElementById("edit-booking-modal").style.display = "block";
+}
+
+function saveEditedBooking() {
+  const newDate = document.getElementById("edit-date").value;
+  const newTime = document.getElementById("edit-time").value;
+
+  if (editingIndex !== null) {
+    bookings[editingIndex].date = newDate;
+    bookings[editingIndex].time = newTime;
+    updateBookings();
+    editingIndex = null;
+    document.getElementById("edit-booking-modal").style.display = "none";
   }
 }
 
-window.onload = () => {
-  const user = JSON.parse(localStorage.getItem("mentora_user"));
-  if (user) {
-    currentUser = user;
-    showDashboard(user.name);
-  }
+function deleteBooking(index) {
+  bookings.splice(index, 1);
+  updateBookings();
+}
 
-  loadSessions();
-  renderDashboard();
-
-  // Event bindings
-  document.getElementById("signup-form").addEventListener("submit", signup);
-  document.getElementById("login-form").addEventListener("submit", login);
-  document.getElementById("booking-form").addEventListener("submit", handleBooking);
-  document.getElementById("logout-btn").addEventListener("click", () => {
-    localStorage.removeItem("mentora_user");
-    currentUser = null;
-    showLogin();
-  });
-};
+function logout() {
+  localStorage.removeItem("mentoraUser");
+  alert("Logged out.");
+  window.location.href = "login.html";
+}
