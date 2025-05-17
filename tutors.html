@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Tutors – Mentora</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f8fb;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 30px;
+    }
+    .tutor-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 400px;
+      text-align: left;
+    }
+    .tutor-card h2 {
+      color: #4a90e2;
+      margin-bottom: 5px;
+    }
+    .tutor-card p {
+      color: #666;
+      margin-bottom: 15px;
+    }
+    .tutor-card button {
+      background: #4a90e2;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .tutor-card button:hover {
+      background: #357ABD;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Meet Our Tutors</h1>
+
+  <div class="tutor-card">
+    <h2>Ustadha Rakiya</h2>
+    <p>📘 Female Tutor — Kids & Beginners</p>
+    <button onclick="bookTutor('Ustadha Rakiya')">Book Now</button>
+  </div>
+
+  <div class="tutor-card">
+    <h2>Ustadh Abdirahman</h2>
+    <p>📗 Male Tutor — Hifz & Tajweed</p>
+    <button onclick="bookTutor('Ustadh Abdirahman')">Book Now</button>
+  </div>
+
+  <div class="tutor-card">
+    <h2>Ustadha Shukri</h2>
+    <p>📙 Female Tutor — Arabic & Quran</p>
+    <button onclick="bookTutor('Ustadha Shukri')">Book Now</button>
+  </div>
+
+  <script>
+    function bookTutor(tutorName) {
+      localStorage.setItem("selectedTutor", tutorName);
+      window.location.href = "booking.html";
+    }
+  </script>
+
+</body>
+</html>
