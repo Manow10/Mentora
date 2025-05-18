@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard - Mentora</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f8ff;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+      color: #0077cc;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #0077cc;
+      color: white;
+    }
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Mentora Admin Dashboard</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Tutor</th>
+      <th>Date</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody id="bookingTableBody"></tbody>
+</table>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
+  import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyABJhKf5suoKrUPTI6qKF1DVCeV51ENa08",
+    authDomain: "mentoraapp-7c915.firebaseapp.com",
+    projectId: "mentoraapp-7c915",
+    storageBucket: "mentoraapp-7c915.appspot.com",
+    messagingSenderId: "251816072807",
+    appId: "1:251816072807:web:514e5188e869b98c05a6c2",
+    measurementId: "G-T03S2SV79K"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const tableBody = document.getElementById('bookingTableBody');
+
+  async function loadBookings() {
+    const bookingsRef = collection(db, "bookings");
+    const snapshot = await getDocs(bookingsRef);
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${data.studentName}</td>
+        <td>${data.tutorName}</td>
+        <td>${data.sessionDate}</td>
+        <td>${data.sessionTime}</td>
+      `;
+      tableBody.appendChild(row);
+    });
+  }
+
+  loadBookings();
+</script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Body Styling */
+body {
+  background: #f3f9fb;
+  color: #333;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+/* Header */
+header {
+  background: #4fc3f7;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+}
+
+header h1 {
+  color: white;
+  font-size: 2em;
+}
+
+header button {
+  background: white;
+  color: #4fc3f7;
+  border: none;
+  padding: 10px 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+header button:hover {
+  background: #e0f7fa;
+}
+
+/* Main Content */
+main {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  max-width: 600px;
+  margin: auto;
+}
+
+h2 {
+  margin-bottom: 15px;
+  color: #0077b6;
+}
+
+/* Tutor List */
+ul#tutor-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul#tutor-list li {
+  background: #e1f5fe;
+  margin-bottom: 12px;
+  padding: 14px;
+  border-left: 6px solid #4fc3f7;
+  border-radius: 8px;
+  font-size: 1.1em;
+}
+
+/* Buttons */
+button {
+  transition: background 0.3s ease;
+}
+
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.5em;
+  }
+
+  main {
+    padding: 15px;
+  }
+
+  ul#tutor-list li {
+    font-size: 1em;
+  }
+}
