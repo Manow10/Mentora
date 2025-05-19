@@ -5,16 +5,101 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login - Mentora</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: #e0f2ff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+    h2 {
+      text-align: center;
+      color: #0077cc;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #0077cc;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+    p {
+      text-align: center;
+      margin-top: 15px;
+    }
+    a {
+      color: #0077cc;
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
-  <h2>Login to Mentora</h2>
-  <input type="text" id="login-username" placeholder="Username" required>
-  <input type="password" id="login-password" placeholder="Password" required>
-  <button onclick="login()">Login</button>
-  <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+  <div class="login-container">
+    <h2>Login to Mentora</h2>
+    <input type="text" id="login-email" placeholder="Email" />
+    <input type="password" id="login-password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+    <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+  </div>
 
-  <script type="module" src="firebase.js"></script>
-<script type="module" src="auth.js"></script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-auth.js";
 
+    const firebaseConfig = {
+      apiKey: "AIzaSyABJhKf5suoKrUPTI6qKF1DVCeV51ENa08",
+      authDomain: "mentoraapp-7c915.firebaseapp.com",
+      projectId: "mentoraapp-7c915",
+      storageBucket: "mentoraapp-7c915.appspot.com",
+      messagingSenderId: "251816072807",
+      appId: "1:251816072807:web:514e5188e869b98c05a6c2",
+      measurementId: "G-T03S2SV79K"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    window.login = async function () {
+      const email = document.getElementById("login-email").value.trim();
+      const password = document.getElementById("login-password").value.trim();
+
+      if (!email || !password) {
+        alert("Please enter both email and password.");
+        return;
+      }
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        alert("Login successful!");
+        window.location.href = "tutors.html"; // 🔁 Change to your next page if needed
+      } catch (error) {
+        alert("Login error: " + error.message);
+      }
+    };
+  </script>
 </body>
 </html>
